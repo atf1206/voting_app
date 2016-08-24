@@ -6,12 +6,14 @@
    var profileUsername = document.querySelector('#profile-username') || null;
    var profileRepos = document.querySelector('#profile-repos') || null;
    var displayName = document.querySelector('#display-name');
-   var apiUrl = appUrl + '/api/:id';
+   var apiUrl = appUrl + '/api/:id';   /*global appUrl*/
+   var apiUrl3 = appUrl + '/api/:id/allquestions'; /*global appUrl*/
+   var questionContainer = document.querySelector('.question-container');
 
    function updateHtmlElement (data, element, userProperty) {
       element.innerHTML = data[userProperty];
    }
-
+   /* global ajaxFunctions */
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, function (data) {
       var userObject = JSON.parse(data);
 
@@ -34,4 +36,13 @@
       }
 
    }));
+   /* Gets all Polls from all Users ... I hope */
+   ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl3, function (data) {
+      var userObject = JSON.parse(data);
+      for (var i = 0; i < userObject.length; i++) {
+         questionContainer.innerHTML += "<div class='question'>Question: " +userObject[i]['question']+ "</div>";
+      }
+      
+   }));
+   
 })();

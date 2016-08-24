@@ -99,10 +99,11 @@ header a ~ p {
 
 /****** Logo Div Styling ******/
 
-img {
+.heading-box { /* formerly img */
 	margin: 0 auto;
 	display: block;
-}
+	max-width: 500px; /* new */
+} 
 
 .clementine-text { /* Styling for the Clementine.js text */
 	padding: 0;
@@ -115,7 +116,7 @@ img {
 /****** Click Styling ******/
 
 .btn-container {	/* Styling for the div that contains the buttons */
-	margin: -10px auto 0 auto;
+	margin: -10px auto 20px auto;
 	text-align: center;
 }
 
@@ -150,6 +151,31 @@ img {
 #click-nbr {
 	font-weight: 400;
 }
+
+textarea { /* Styling for poll input area */
+  border-radius: 4px;
+  font-size: 14px;
+  resize: none;
+  line-height: 17px;
+  vertical-align: bottom;
+}
+
+/****** Poll Styling ******/
+
+.question-container {
+	margin: 0 auto;
+	width: 600px;
+}
+
+.question {
+  width: 600px;
+  background: #ECEFF1;
+  margin: 5px;
+  border: 1px solid #00BCD4;
+  border-radius: 5px;
+  padding: 6px 6px 5px 6px;
+}
+
 
 /****** Profile Styling ******/
 

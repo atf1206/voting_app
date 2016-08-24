@@ -1,3 +1,5 @@
+//mongod --smallfiles then node server.js
+
 'use strict';
 
 var express = require('express');

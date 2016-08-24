@@ -3,6 +3,7 @@
 var mongoose = require('mongoose');
 //var Schema = mongoose.Schema;
 
+/*
 //var User = new Schema({
 var User = new mongoose.Schema({
 	github: {
@@ -15,13 +16,13 @@ var User = new mongoose.Schema({
       clicks: Number
    }
 });
-/*
+*/
 var Poll = new mongoose.Schema({
   question: {type: String, required: true},
   pubDate: {type: Date, default: Date.now}
 });
 
-
+/*
 var Poll = new mongoose.Schema({
   name: {type: String, required: true},
   question: {type: String, required: true},
@@ -47,5 +48,5 @@ Poll.methods.wasPublishedRecently = function () {
 
 */
 
-module.exports = mongoose.model('User', User);
-//module.exports = mongoose.model('Polls', Polls);
+//module.exports = mongoose.model('User', User);
+module.exports = mongoose.model('Poll', Poll);

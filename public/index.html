@@ -3,7 +3,7 @@
 <html>
 
 	<head>
-		<title>Clementine.js - The elegant and lightweight full stack JavaScript boilerplate.</title>
+		<title>Fritz's Polling App</title>
 		
 		<link href="/public/css/main.css" rel="stylesheet" type="text/css">
 	</head>
@@ -15,13 +15,13 @@
 		<a class="menu" href="/logout">Logout</a>
 	</header>
 
-	<body>
-		<div class="container">
-			<img src="/public/img/clementine_150.png" />
+		<br>
+		<div class="container heading-box">
+			<img src="/public/img/texas_flag.jpg" style="max-width: 100px; float: left;"/>
+			<p class="clementine-text">Fritz's Poll App</p>
 			<br />
-			<p class="clementine-text">Clementine.js</p>
 		</div>
-	
+		
 		<div class="container">
 			<p>You have clicked the button <span id="click-nbr"></span> times.</p>
 			<br />
@@ -29,6 +29,18 @@
 				<button type="submit" class="btn btn-add">CLICK ME!</button>
 				<button class="btn btn-delete">RESET</button>
 			</div>
+			
+			<p>Type your question below:<span id=""></span></p>
+			<br />
+			<div class="btn-container">
+				<button type="submit" class="btn btn-add-question">Add Poll Question</button>
+		    	<textarea class="text-add-question" rows="3" cols="57"></textarea>
+				<!-- <button class="btn btn-delete">RESET</button> -->
+			</div>
+			<div class="question-container">
+		    
+			</div>
+			
 		</div>
 		
 		<script type="text/javascript" src="common/ajax-functions.js"></script>
