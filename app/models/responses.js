@@ -1,17 +1,17 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var Responses = require('../models/responses.js').schema;
-
+/*
 var Poll = new mongoose.Schema({
   question: {type: String, required: true},
   pubDate: {type: Date, default: Date.now},
   createdById: Number,
   responses: [Responses]
 });
-/*
+*/
 var Responses = new mongoose.Schema({
-  responsetext: String,
+  responseText: {type: String},
+  createdById: Number,
   votes: [Number]
 });
 /*
@@ -29,4 +29,4 @@ Poll.methods.wasPublishedRecently = function () {
 }
 */
 
-module.exports = mongoose.model('Poll', Poll);
+module.exports = mongoose.model('Responses', Responses);

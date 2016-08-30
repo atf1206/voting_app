@@ -10,7 +10,6 @@ function ClickHandler () {
 			.findOne({ 'github.id': req.user.github.id }, { '_id': false })
 			.exec(function (err, result) {
 				if (err) { throw err; }
-				
 				res.json(result.nbrClicks);
 			});
 	};
@@ -20,7 +19,6 @@ function ClickHandler () {
 			.findOneAndUpdate({ 'github.id': req.user.github.id }, { $inc: { 'nbrClicks.clicks': 1 } })
 			.exec(function (err, result) {
 				if (err) { throw err; }
-				
 				res.json(result.nbrClicks);
 			});
 	};
@@ -30,22 +28,21 @@ function ClickHandler () {
 			.findOneAndUpdate({ 'github.id': req.user.github.id }, { 'nbrClicks.clicks': 0 })
 			.exec(function (err, result) {
 				if (err) { throw err; }
-				
 				res.json(result.nbrClicks);
 			});
 	};
 	
 	this.addQuestion = function (req, res) {
-		console.log(req.query.q);
-		var newQuestion = Polls({			/*global Polls (polls.js)*/
-			question: req.query.q
+		console.log(req.query);
+		var newQuestion = Polls({		/*global Polls (polls.js)*/
+			question: req.query.q,
+			createdById: req.query.z
 		});
 		
 		newQuestion.save( function(err) {
 			if (err) throw err;
-			console.log('User created!');
 		});
-		res.send(newQuestion.question);
+		res.send(newQuestion);
 	};
 	
 	this.getQuestions = function (req, res) {
@@ -56,10 +53,13 @@ function ClickHandler () {
 			});
 	};
 	
-	/*
-	var now = new Date()
-	var time = now.getTime()
-	*/
+	this.deleteQuestion = function (req, res) {
+		Polls
+			.findOneAndRemove({'_id': req.query.p}, function(err, poll) {
+				if (err) throw err;
+				res.send(req.query.p);
+			});
+	};
 }
 
 module.exports = ClickHandler;

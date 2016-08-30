@@ -1,5 +1,6 @@
 'use strict';
 
+/* global userObject */
 (function () {
 
    var profileId = document.querySelector('#profile-id') || null;
@@ -15,7 +16,7 @@
    }
    /* global ajaxFunctions */
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, function (data) {
-      var userObject = JSON.parse(data);
+      userObject = JSON.parse(data);
 
       if (userObject.displayName !== null) {
          updateHtmlElement(userObject, displayName, 'displayName');
@@ -24,7 +25,7 @@
       }
 
       if (profileId !== null) {
-         updateHtmlElement(userObject, profileId, 'id');   
+         updateHtmlElement(userObject, profileId, 'id');
       }
 
       if (profileUsername !== null) {
@@ -34,15 +35,30 @@
       if (profileRepos !== null) {
          updateHtmlElement(userObject, profileRepos, 'publicRepos');   
       }
+      
+      var userId = userObject['id'];
+      ajaxFunctions.ajaxRequest('GET', apiUrl3, function (data) {
+         var pollsObject = JSON.parse(data);
+         /* Paints all Polls from all Users */
+         questionContainer.innerHTML = '';
+         for (var i = 0; i < pollsObject.length; i++) {
+            
+   	      //paints accompanying delete button if owned
+   	      console.log(pollsObject[i]['createdById']);
+   	      if (pollsObject[i]['createdById'] == userId || pollsObject[i]['createdById'] === undefined) {
+   	         questionContainer.innerHTML += (
+               "<div class='question question-delete' id='" +pollsObject[i]['_id']+ "'>X</div>"
+   	         );
+   	         questionContainer.innerHTML += (
+               "<a href='/poll/?q=" +pollsObject[i]['_id']+ "&z=" +userId+ "'><div class='question-owned' id='" +pollsObject[i]['_id']+ "'>" +pollsObject[i]['question']+ "</div></a>"
+   	      );
+   	      } else {
+   	         questionContainer.innerHTML += (
+               "<a href='/poll/?q=" +pollsObject[i]['_id']+ "&z=" +userId+ "'><div class='question' id='" +pollsObject[i]['_id']+ "'>" +pollsObject[i]['question']+ "</div></a>"
+   	         );
+   	      }
+         }
+      });
 
    }));
-   /* Gets all Polls from all Users ... I hope */
-   ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl3, function (data) {
-      var userObject = JSON.parse(data);
-      for (var i = 0; i < userObject.length; i++) {
-         questionContainer.innerHTML += "<div class='question'>Question: " +userObject[i]['question']+ "</div>";
-      }
-      
-   }));
-   
 })();

@@ -9,9 +9,9 @@ var User = new mongoose.Schema({
 		id: String,
 		displayName: String,
 		username: String,
-        publicRepos: Number
+    publicRepos: Number
 	},
-   nbrClicks: {
+    nbrClicks: {
       clicks: Number
    }
 });

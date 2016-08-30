@@ -34,9 +34,18 @@ p {
 	margin: 8px 0 0 0;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .container p {
 	text-align: center;
 	padding: 0;
+}
+
+.hidden {
+  display: none;
 }
 
 /****** Header Styling ******/
@@ -101,16 +110,19 @@ header a ~ p {
 
 .heading-box { /* formerly img */
 	margin: 0 auto;
+  margin-top: -45px;
 	display: block;
-	max-width: 500px; /* new */
+  background: #00BCD4;
 } 
 
 .clementine-text { /* Styling for the Clementine.js text */
 	padding: 0;
-	margin: -25px 0 0 0;
 	font-weight: 500;
 	font-size: 60px;
 	color: #FFA000;
+  line-height: 120px;
+  text-shadow: 0 0 3px black;
+  cursor: default;
 }
 
 /****** Click Styling ******/
@@ -154,28 +166,131 @@ header a ~ p {
 
 textarea { /* Styling for poll input area */
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 18px;
   resize: none;
-  line-height: 17px;
+  height: 45px;
   vertical-align: bottom;
+  padding: 4px;
+}
+.backbutton {
+  margin: 10px auto 0px;
+  font-size: 16px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 180px;
+}
+.backbutton:hover {
+  background: #00BCD4;
+}
+.backtext {
+  float: right;
+  padding: 5px;
+  line-height: 25px;
+  margin-right: 2px;
 }
 
 /****** Poll Styling ******/
 
 .question-container {
-	margin: 0 auto;
-	width: 600px;
+	margin: 5px auto;
+  margin-bottom: 15px;
+	width: 616px;
 }
-
 .question {
-  width: 600px;
   background: #ECEFF1;
-  margin: 5px;
+  margin: 5px 0px 5px 7px;
   border: 1px solid #00BCD4;
   border-radius: 5px;
+  cursor: pointer;
   padding: 6px 6px 5px 6px;
 }
+.question:hover {
+  background: #00BCD4;
+}
+.question-owned:hover {
+  background: #00BCD4;
+}
+.questionnohover {
+  background: #ECEFF1;
+  margin: 15px 0 5px 0;
+  padding: 6px 6px 5px 6px;
+  border: 1px solid #00BCD4;
+  border-radius: 5px;
+  cursor: default;
+  font-size: 18px;
+}
+.question-owned {
+  font-size: 18px;
+  background: #ECEFF1;
+  margin: 5px 0px 5px 7px;
+  border: 1px solid #00BCD4;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 6px 6px 5px 6px;
+  margin-right:36px;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+}
+.question-delete {
+  font-size: 17px;
+  padding: 7px 8px 5px 7px;
+  float: right;
+  text-align: center;
+  width: 32px;
+  margin: 0;
+  border: 1px solid #00BCD4;
+  border-radius: 0 5px 5px 0;
+}
+.question-delete:hover {
+  background: red;
+}
+.response-container {
+  margin: 15px auto 45px;
+  width: 560px;
+  min-height: 60px;
+}
+.response {
+  background: #ECEFF1;
+  margin: 4px 0;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px 0px 3px 3px;
+  cursor: pointer;
+}
+.response:hover {
+  background: #00BCD4;
+}
+.response-owned {
+  margin-right:36px;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+}
+.response-delete {
+  float: right;
+  text-align: center;
+  width: 32px;
+  margin: 0;
+  border: 1px solid black;
+  border-radius: 0 5px 5px 0;
+}
+.response-delete:hover {
+  background: red;
+}
+.selected {
+  background: #FFA000;
+}
+.selected:hover {
+  background: #FFA000;
+}
 
+/****** Chart Styling ******/
+
+.chart {
+  margin: 0 auto;
+  border: 1px solid black;
+  width: 560px;
+  height: 100px;
+}
 
 /****** Profile Styling ******/
 

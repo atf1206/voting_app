@@ -1,5 +1,6 @@
 'use strict';
 
+var userObject;
 (function () {
 
    var addButton = document.querySelector('.btn-add');
@@ -8,6 +9,7 @@
    var apiUrl = appUrl + '/api/:id/clicks'; /*global appUrl*/
    var apiUrl2 = appUrl + '/api/:id/question'; /*global appUrl*/
    var addQuestion = document.querySelector('.btn-add-question');
+   var deleteQuestion = document.querySelector('.question-container');
    var questionContainer = document.querySelector('.question-container');
 
    /*global ajaxFunctions*/
@@ -18,14 +20,26 @@
    }
    
    function addNewQuestion (data) {
-      //var pollObject = JSON.parse(data);
-      questionContainer.innerHTML += "<div class='question'>Question: " +data+ "</div>";
+      var pollObject = JSON.parse(data);
+      addQuestion.value = "";
+      questionContainer.innerHTML += (
+      "<div class='question question-delete' id='" +pollObject['_id']+ "'>X</div>" +
+      "<a href='/poll/?q=" +pollObject['_id']+ "&z=" +userObject['id']+ "'><div class='question-owned' id='" +pollObject['_id']+ "'>" 
+      +pollObject['question']+ "</div></a>"
+      );
+   }
+   
+   function delQuestion (data) {
+      //clear deleted poll from list
+      console.log(data);
+      document.getElementById(data).className += " hidden";
+      document.getElementById(data).id += "x";
+      document.getElementById(data).className += " hidden";
    }
 
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount));
 
    addButton.addEventListener('click', function () {
-
       ajaxFunctions.ajaxRequest('POST', apiUrl, function () {
          ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount);
       });
@@ -33,18 +47,23 @@
    }, false);
 
    deleteButton.addEventListener('click', function () {
-
       ajaxFunctions.ajaxRequest('DELETE', apiUrl, function () {
          ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount);
       });
 
    }, false);
-   
+
+   //activates the add new poll button
    addQuestion.addEventListener('click', function() {
       var userQuestion = document.querySelector(".text-add-question").value;
-      console.log("sending: " +apiUrl2 + "?" +userQuestion);
-      ajaxFunctions.ajaxRequest('GET', apiUrl2 + "/?q=" +userQuestion, addNewQuestion);
-      
+      ajaxFunctions.ajaxRequest('GET', apiUrl2 + "/?q=" +userQuestion+ "&z=" +userObject['id'], addNewQuestion);
+   }, false);
+   
+   //activates the delete buttons via 'delegation' from question-container
+   deleteQuestion.addEventListener('click', function(event) {
+      if (event.target.className == 'question question-delete') {
+         ajaxFunctions.ajaxRequest('DELETE', apiUrl2 + "/?p=" +event.target.id, delQuestion);
+      }
    }, false);
 
 })();

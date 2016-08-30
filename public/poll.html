@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Fritz's Polling App</title>
+		<link href="/public/css/main.css" rel="stylesheet" type="text/css">
+	</head>
+
+	<header>
+		<p>Welcome, <span id="display-name"></span>! &nbsp&nbsp<a class="menu" href="/logout">Logout</a></p>
+	</header>
+
+		<div class="container heading-box">
+			<p class="clementine-text">&nbsp
+	        <!--<img src="http://www.united-states-flag.com/media/catalog/category/texas-poly-flags.jpg" style="max-width: 100px; float: left;"/>-->
+	        <img src="/public/img/texas_flag.jpg" style="max-width: 100px; display: inline; margin-bottom: -18px; margin-left: -10px;"/>
+	        Fritz's Poll App 
+	    	</p>
+		</div>
+		
+	<div class="container">
+		
+		<a href="../"><div class="backbutton">
+			<img src="/public/img/back.png" style="width: 22px; margin: 5px -5px 3px 7px;">
+			<div class="backtext">return to main page</div></div>
+		</a>
+
+		<div class="question-container">
+	   		<div class="questionnohover" id="">loading...</div>
+		</div>
+		
+		<div class="response-container">
+        <div class='response selected'>1st response</div>
+        <div class='response response-delete'>X</div>
+        <div class='response response-owned'>2nd response</div>
+	</div>
+
+		<p>Add additional responses below:</p>
+		<br>
+		<div class="btn-container">
+			<button type="submit" class="btn btn-add-response btn-add-question">Add a Response</button>
+	    	<textarea class="text-add-response text-add-poll" rows="3" cols="44"></textarea>
+		</div>
+		<br>
+		
+	    <div class='chart'> 
+	    	<p>chart goes here</p>
+			<div id="chart_div"></div>
+		</div>
+
+		</div>
+		
+		<script type="text/javascript" src="../common/ajax-functions.js"></script>
+		<script type="text/javascript" src="../controllers/clickControllerPoll.client.js"></script>
+		<script type="text/javascript" src="../controllers/userControllerPoll.client.js"></script>
+		
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+			google.charts.load('current', {'packages':['corechart']});
+
+			// Set a callback to run when the Google Visualization API is loaded.
+			google.charts.setOnLoadCallback(drawChart);
+			
+			// Callback that creates and populates a data table,
+			// instantiates the pie chart, passes in the data and
+			// draws it.
+			function drawChart() {
+			
+			// Create the data table.
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Topping');
+			data.addColumn('number', 'Slices');
+			data.addRows([
+			  ['Mushrooms', 3],
+			  ['Onions', 1],
+			  ['Olives', 1],
+			  ['Zucchini', 1],
+			  ['Pepperoni', 2]
+			]);
+			
+			// Set chart options
+			var options = {'title':'How Much Pizza I Ate Last Night',
+			               'width':400,
+			               'height':300};
+			
+			// Instantiate and draw our chart, passing in some options.
+			var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+			chart.draw(data, options);
+			}
+		</script>
+		
+	</body>
+</html>
