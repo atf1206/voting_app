@@ -49,7 +49,7 @@ function ClickHandler () {
 		Polls
 			.find({}, function(err, polls) {
 				if (err) throw err;
-				res.send(polls);	// object of all the users
+				res.send(polls);	// object of all the polls
 			});
 	};
 	

@@ -39,12 +39,12 @@
       var userId = userObject['id'];
       ajaxFunctions.ajaxRequest('GET', apiUrl3, function (data) {
          var pollsObject = JSON.parse(data);
-         /* Paints all Polls from all Users */
          questionContainer.innerHTML = '';
+         
+         /* Paints all Polls from all Users */
          for (var i = 0; i < pollsObject.length; i++) {
             
    	      //paints accompanying delete button if owned
-   	      console.log(pollsObject[i]['createdById']);
    	      if (pollsObject[i]['createdById'] == userId || pollsObject[i]['createdById'] === undefined) {
    	         questionContainer.innerHTML += (
                "<div class='question question-delete' id='" +pollsObject[i]['_id']+ "'>X</div>"

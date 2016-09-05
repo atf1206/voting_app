@@ -14,6 +14,7 @@
    function updateHtmlElement (data, element, userProperty) {
       element.innerHTML = data[userProperty];
    }
+   
    /* global ajaxFunctions global userObject */
    /* these prepare the page on load */
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, function (data) {
@@ -38,11 +39,11 @@
       }
       
       var userId = userObject['id'];
-      apiUrl4 += userId;
-      
+      var apiUrl4WithId = apiUrl4 + userId;
+
       /* global pollObject */
       /* Paints the selected poll */
-      ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl4, function (data) {
+      ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl4WithId, function (data) {
          pollObject = JSON.parse(data);
          var numberOfResponses = pollObject['responses'].length;
          questionContainer.innerHTML = (
@@ -89,3 +90,11 @@
    }));
    
 })();
+/*
+function passUserData () {
+   return(userObject);
+}
+function passPollData () {
+   return(pollObject);
+}
+*/

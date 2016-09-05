@@ -1,12 +1,11 @@
 'use strict';
 
 var userObject;
+var pollObject;
+//module.exports.pollObject = pollObject;
+
 (function () {
 
-   var addButton = document.querySelector('.btn-add');
-   var deleteButton = document.querySelector('.btn-delete');
-   var clickNbr = document.querySelector('#click-nbr');
-   var apiUrl = appUrl + '/api/:id/clicks'; /*global appUrl*/
    var apiUrl2 = appUrl + '/api/:id/question'; /*global appUrl*/
    var addQuestion = document.querySelector('.btn-add-question');
    var deleteQuestion = document.querySelector('.question-container');
@@ -14,13 +13,13 @@ var userObject;
 
    /*global ajaxFunctions*/
 
-   function updateClickCount (data) {
+   /*function updateClickCount (data) {
       var clicksObject = JSON.parse(data);
       clickNbr.innerHTML = clicksObject.clicks;
-   }
+   }*/
    
    function addNewQuestion (data) {
-      var pollObject = JSON.parse(data);
+      pollObject = JSON.parse(data);
       addQuestion.value = "";
       questionContainer.innerHTML += (
       "<div class='question question-delete' id='" +pollObject['_id']+ "'>X</div>" +
@@ -31,27 +30,12 @@ var userObject;
    
    function delQuestion (data) {
       //clear deleted poll from list
-      console.log(data);
       document.getElementById(data).className += " hidden";
       document.getElementById(data).id += "x";
       document.getElementById(data).className += " hidden";
    }
 
-   ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount));
-
-   addButton.addEventListener('click', function () {
-      ajaxFunctions.ajaxRequest('POST', apiUrl, function () {
-         ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount);
-      });
-
-   }, false);
-
-   deleteButton.addEventListener('click', function () {
-      ajaxFunctions.ajaxRequest('DELETE', apiUrl, function () {
-         ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount);
-      });
-
-   }, false);
+   //ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount));
 
    //activates the add new poll button
    addQuestion.addEventListener('click', function() {

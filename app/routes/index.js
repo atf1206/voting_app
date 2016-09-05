@@ -101,6 +101,6 @@ module.exports = function (app, passport) {
 	app.route('/api/:id/vote')
 		.get(isLoggedIn, function (req, res) {
 			addVote(req, res);
-		})
+		});
 	
 };

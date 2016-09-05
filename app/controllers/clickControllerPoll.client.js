@@ -17,18 +17,27 @@ var pollObject;
    function addNewResponse (data) {
       var newObject = JSON.parse(data);
       responseContainer.innerHTML += "<div class='response response-delete' id='" +newObject['_id']+ "'>X</div><div class='response response-owned' id='" +newObject['_id']+ "'>" +newObject['responseText']+ "</div>";
+      drawChart();
    }
    /* this just hides the deleted responses on the client side */
    function hideResponse (responseId) {
       document.getElementById(responseId).className += " hidden";
       document.getElementById(responseId).id += "x";
       document.getElementById(responseId).className += " hidden";
+      drawChart();
    }
    /* marks a response as voted */
    function vote (data) {
       var responses = document.getElementsByClassName('response');
       for (var i = 0; i < responses.length; i++) {
-         responses[i].className = responses[i].className.replace(/selected/, " ");
+         
+         //wipes all responses as not selected
+         if (responses[i].className == "response selected") {
+            responses[i].className = "response";
+         } else if (responses[i].className == "response response-owned selected") {
+            responses[i].className = "response response-owned";
+         }
+         //responses[i].className = responses[i].className.replace(/selected/, " ");
          
          //Matches the correct selection and marks it as voted
          if (responses[i].id == data) {
@@ -39,6 +48,7 @@ var pollObject;
             }
          }
       }
+      drawChart();
    }
    
    //activates the add new response button
